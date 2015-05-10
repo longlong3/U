@@ -1,0 +1,54 @@
+<center>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+这是个网址缩短服务
+<br>
+<br>域名是长了点儿 ㄟ( ▔, ▔ )ㄏ ）
+<br>
+<br>
+<br>
+<input id="tt" type="text" name="tt"  onkeydown="keydown()" /> <input type="button" id="button1" onclick="ss()" value="Short">
+<br>
+<br>
+<br>
+<div id="omg"></div>
+<script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+function keydown()
+{
+	var code=window.event.keyCode;
+	if(code==13)
+		ss();
+}
+var ss = function(){
+  var xmlhttp;
+  if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+  }else{// code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  
+  xmlhttp.onreadystatechange=function(){
+    if (xmlhttp.readyState==4){
+      //document.getElementById("content").innerHTML=xmlhttp.responseText;
+      if(xmlhttp.status==200){
+        //alert("POST OK")
+	//document.write(xmlhttp.responseText)
+        //$("#updated").css({"backgroundColor":oldcolor});
+        $("#tt").val("")
+        document.getElementById("omg").innerHTML="短网址: <a  target=\"_blank\"   href=\"http://"+xmlhttp.responseText+"\">"+xmlhttp.responseText+"</a>"
+      }else{
+        alert("POST ERROR")
+      }
+    }
+  };
+  xmlhttp.open("GET","/short?long="+encodeURIComponent($("#tt").val()),true);
+  xmlhttp.send();
+}
+</script>
+</center>
